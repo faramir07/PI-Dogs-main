@@ -30,7 +30,6 @@ async function getAllDogs() {
       attributes: ['name'],
     }
   });
-  console.log(getAllDogsDb);
   const dogDb = getAllDogsDb.map(e => {
     return {
       id: e.id,
@@ -63,9 +62,9 @@ async function getTemper(arr) {
         }
       })
     });
-    console.log(createDb);
   }else {
-    return getTemper;
+    const tempers = getTemper.map(e => e.name);
+    return tempers;
   }
 };
 

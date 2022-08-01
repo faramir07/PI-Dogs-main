@@ -14,7 +14,7 @@ router.use(express.json());
 // Ejemplo: router.use('/auth', authRouter);
 router.use('/dogs', Dogs);
 router.use('/create', Createdog);
-router.use('/temper', Temper);
+router.use('/temperaments', Temper);
 
 
 module.exports = router;
