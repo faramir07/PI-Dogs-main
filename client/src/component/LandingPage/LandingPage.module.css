@@ -1,0 +1,25 @@
+/* font-family: 'Nunito', sans-serif; */
+.contenLandingPage {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.contenImg {
+
+}
+
+.img{
+  border-radius: 0% 50% 50% 50%;
+}
+
+.contenText {
+  /* font-family: 'Nunito'; */
+  font-size: 20px;
+}
+
+.link {
+
+}
