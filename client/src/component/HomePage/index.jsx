@@ -3,6 +3,7 @@ import NavBar from '../NavBar';
 import { useDispatch, } from "react-redux";
 import { getAllDogs } from '../../Redux/Actions';
 import  AllDogs  from '../AllDogs'
+import Filter from '../Filter';
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function HomePage() {
   return (
     <div>
       <NavBar />
+      <Filter />
       <AllDogs
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

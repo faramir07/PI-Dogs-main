@@ -5,7 +5,7 @@ const router = Router();
 
 
 router.post('/', async (req, res, next) => {
-  const {name, height_min, height_max, weight_min, weight_max, year, temperament} = req.body;
+  const {name, height_min, height_max, weight_min, weight_max, life_min, life_max, img, temperament} = req.body;
   try{
     const newDog = await postDog(
       name,
@@ -13,8 +13,11 @@ router.post('/', async (req, res, next) => {
       height_max,
       weight_min,
       weight_max,
-      year,
-      temperament
+      life_min,
+      life_max,
+      img,
+      temperament,
+      createDb
       )
     res.status(201).send(newDog)
   } catch (error) {

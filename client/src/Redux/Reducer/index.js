@@ -1,4 +1,4 @@
-import { GET_ALL_DOGS } from '../Actions/Actions.js'
+import { GET_ALL_DOGS, GET_TEMPERAMENT, POST_DOG } from '../Actions/Actions.js'
 
 
 const initialState = {
@@ -17,7 +17,16 @@ export default function reducer(state = initialState, { type, payload }){
         allDogs: payload,
         allDogsFilter: payload,
         dogsHome: payload,
-      }
+      };
+      case GET_TEMPERAMENT:
+        return {
+          ...state,
+          temperaments: payload,
+        };
+        case POST_DOG:
+          return {
+            ...state
+          }
     default:
       return {...state}
   }

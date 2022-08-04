@@ -4,7 +4,7 @@ import Dog from '../Dog';
 import Loader from '../Loader';
 import DogPerPage from '../DogPerPage';
 
-export default function AllDogs(currentPage, setCurrentPage, dogsPerPage, indexOfFirstDog, indexOfLastDog) {
+export default function AllDogs({currentPage, setCurrentPage, dogsPerPage, indexOfFirstDog, indexOfLastDog}) {
 
   const allDogsState = useSelector(state => state.allDogs);
 
@@ -18,10 +18,10 @@ export default function AllDogs(currentPage, setCurrentPage, dogsPerPage, indexO
     <div>
       {dogs.length > 0 ? (
         dogs.map((dog, i) => (
-          <Link to={`/home/${dog.id}`} key={i} className={StyleSheet.link}>
+          <Link to={`/detail/${dog.id}`} key={i} className={StyleSheet.link}>
             <Dog
             img={dog.img}
-            name={dog.img}
+            name={dog.name}
             weight_min={dog.weight_min}
             weight_max={dog.weight_max}
             temperament={dog.temperament}

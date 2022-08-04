@@ -2,9 +2,9 @@ export const GET_ALL_DOGS = 'GET_ALL_DOGS';
 
 // export const GET_DETAILS = 'GET_DETAILS';
 
-// export const GET_TEMPERAMENT = 'GET_TEMPERAMENT';
+export const GET_TEMPERAMENT = 'GET_TEMPERAMENT';
 
-// export const DOG_POST = 'DOG_POST';
+export const POST_DOG = 'POST_DOG';
 
 // export const FILTER_DOG = 'FILTER_DOG';
 
