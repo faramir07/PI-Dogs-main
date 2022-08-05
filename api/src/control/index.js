@@ -4,7 +4,7 @@ const { Dog, Temper } = require("../db.js");
 
 async function getAllDogs() {
   // https://api.thedogapi.com/v1/breeds?api_key=b67fcfff-6222-4682-b9a0-c674d6e3fc37
-  // https://api.thedogapi.com/v1/breeds/search?q=Akita  
+  // https://api.thedogapi.com/v1/breeds/search?q=Akita
   const responceApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${APY_KEY_DOG}`)
   const res = await responceApi.data
   const getAllDogsApi = [];
@@ -51,7 +51,7 @@ async function getAllDogs() {
 
 async function getTemper(arr) {
   const getTemper = await Temper.findAll({
-    attributes: ['name']
+    attributes: ['name', 'id']
   })
 
   if(getTemper.length === 0){
@@ -65,7 +65,12 @@ async function getTemper(arr) {
       })
     });
   }else {
-    const tempers = getTemper.map(e => e.name);
+    const tempers = getTemper.map(e => {
+      return ({
+        name: e.name,
+        id: e.id
+      })
+    } );
     return tempers;
   }
 };
