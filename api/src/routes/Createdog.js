@@ -17,7 +17,6 @@ router.post('/', async (req, res, next) => {
       life_max,
       img,
       temperament,
-      createDb
       )
     res.status(201).send(newDog)
   } catch (error) {

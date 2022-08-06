@@ -31,6 +31,7 @@ async function getAllDogs() {
       attributes: ['name'],
     }
   });
+
   const dogDb = getAllDogsDb.map(e => {
     return {
       id: e.id,
@@ -42,7 +43,8 @@ async function getAllDogs() {
       life_min: e.life_min,
       life_max: e.life_max,
       img: e.img,
-      temperament: e.tempers.map(e => e.name)
+      temperament: e.tempers.map(e => e.name),
+      createDb: e.createDb
     }
   })
   const allDogs = [...dogDb, ...getAllDogsApi];
@@ -137,7 +139,7 @@ async function postDog(name, height_min, height_max, weight_min, weight_max, lif
       life_min,
       life_max,
       img,
-      temperament
+      temperament,
     });
     const temperDb = await Temper.findAll({
       where: {
