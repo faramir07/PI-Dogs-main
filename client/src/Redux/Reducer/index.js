@@ -1,4 +1,4 @@
-import { GET_ALL_DOGS, GET_TEMPERAMENT, POST_DOG } from '../Actions/Actions.js'
+import { FILTER_CREATED, GET_ALL_DOGS, GET_TEMPERAMENT, POST_DOG } from '../Actions/Actions.js'
 
 
 const initialState = {
@@ -8,6 +8,8 @@ const initialState = {
   temperaments: [],
   dogsHome: [],
 };
+
+
 
 export default function reducer(state = initialState, { type, payload }){
   switch (type) {
@@ -27,7 +29,18 @@ export default function reducer(state = initialState, { type, payload }){
           return {
             ...state
           }
+          case FILTER_CREATED:
+            const allDogsFilter = state.allDogsFilter;
+            const creatdDogs = payload === 'Creados' ? allDogsFilter.filter(dog => dog.createDb) : allDogsFilter.filter(dog => !dog.createDb)
+            console.log('alldogs:',  allDogsFilter);
+            console.log('creatdDogs:',  creatdDogs);
+            return {
+              ...state,
+              allDogs: payload === 'Todos' ? allDogsFilter : creatdDogs
+            }
     default:
       return {...state}
   }
 }
+
+

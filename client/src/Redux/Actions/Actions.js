@@ -8,7 +8,7 @@ export const POST_DOG = 'POST_DOG';
 
 // export const FILTER_DOG = 'FILTER_DOG';
 
-// export const FILTER_CREATED = 'FILTER_CREATED';
+export const FILTER_CREATED = 'FILTER_CREATED';
 
 // export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 

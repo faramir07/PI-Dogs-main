@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../NavBar';
 import { useDispatch, } from "react-redux";
 import { getAllDogs } from '../../Redux/Actions';
@@ -9,7 +9,7 @@ export default function HomePage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllDogs());
+    dispatch(getAllDogs())
   }, [dispatch])
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,7 +21,10 @@ export default function HomePage() {
   return (
     <div>
       <NavBar />
-      <Filter />
+      <Filter
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
+      />
       <AllDogs
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

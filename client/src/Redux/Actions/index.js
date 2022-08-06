@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_ALL_DOGS, GET_TEMPERAMENT, POST_DOG } from './Actions'
+import { FILTER_CREATED, GET_ALL_DOGS, GET_TEMPERAMENT, POST_DOG } from './Actions'
 
 export const getAllDogs = () => {
   return async function(dispatch) {
@@ -41,7 +41,13 @@ export const postDog = (payload) => {
       console.log(error);
       alert('no tenemos peludos con esas caracteristicas');
     }
-    
+  }
+}
+
+export const filterCreate = (payload) => {
+  return {
+    type: FILTER_CREATED,
+    payload
   }
 }
 
