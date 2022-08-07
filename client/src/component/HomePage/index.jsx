@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import NavBar from '../NavBar';
+import React, { useState, useEffect} from 'react';
 import { useDispatch, } from "react-redux";
-import { getAllDogs } from '../../Redux/Actions';
+import { getTemperament } from '../../Redux/Actions'
+import NavBar from '../NavBar';
 import  AllDogs  from '../AllDogs'
 import Filter from '../Filter';
 
 export default function HomePage() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllDogs())
-  }, [dispatch])
 
   const [currentPage, setCurrentPage] = useState(1);
   const [dogsPerPage] = useState(8);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTemperament())
+  }, [dispatch])
 
   const indexOfLastDog = currentPage * dogsPerPage;
   const indexOfFirstDog = indexOfLastDog - dogsPerPage;

@@ -2,7 +2,7 @@ import './App.css';
 import React, { useEffect } from 'react';
 import { useDispatch, } from "react-redux";
 import { Route } from "react-router-dom";
-import { getTemperament, getAllDogs } from './Redux/Actions'
+import {  getAllDogs } from './Redux/Actions'
 import LandingPage from './component/LandingPage';
 import HomePage from './component/HomePage';
 import CreateDogs from './component/CreateDogs';
@@ -12,10 +12,9 @@ function App() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllDogs())
-    dispatch(getTemperament())
-  }, [dispatch])
+    useEffect(() => {
+        dispatch(getAllDogs())
+    }, [dispatch])
 
   return (
     <div className="App">

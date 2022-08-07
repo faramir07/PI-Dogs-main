@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getTemperament } from '../../Redux/Actions'
 import NavBar from '../NavBar';
 import { postDog } from '../../Redux/Actions'
 
@@ -78,6 +79,10 @@ const randonImg = (value) => {
 export default function CreateDogs() {
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getTemperament())
+  }, [dispatch])
 
   const temperaments = useSelector(state => state.temperaments)
   const allDogs = useSelector(state => state.allDogs)

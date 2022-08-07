@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FILTER_CREATED, GET_ALL_DOGS, GET_TEMPERAMENT, POST_DOG } from './Actions'
+import { FILTER_CREATED, FILTER_DOG, GET_ALL_DOGS, GET_TEMPERAMENT, POST_DOG } from './Actions'
 
 export const getAllDogs = () => {
   return async function(dispatch) {
@@ -47,6 +47,13 @@ export const postDog = (payload) => {
 export const filterCreate = (payload) => {
   return {
     type: FILTER_CREATED,
+    payload
+  }
+}
+
+export const filterDog = (payload) => {
+  return {
+    type: FILTER_DOG,
     payload
   }
 }

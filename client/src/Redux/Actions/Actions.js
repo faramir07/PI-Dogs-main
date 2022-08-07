@@ -6,7 +6,7 @@ export const GET_TEMPERAMENT = 'GET_TEMPERAMENT';
 
 export const POST_DOG = 'POST_DOG';
 
-// export const FILTER_DOG = 'FILTER_DOG';
+export const FILTER_DOG = 'FILTER_DOG';
 
 export const FILTER_CREATED = 'FILTER_CREATED';
 
