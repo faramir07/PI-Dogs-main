@@ -1,6 +1,6 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { filterCreate, filterDog } from '../../Redux/Actions'
+import { filterCreate, filterDog, orderAlphabet, OrderWeight } from '../../Redux/Actions'
 
 
 export default function Filter({currentPage, setCurrentPage}) {
@@ -19,6 +19,16 @@ export default function Filter({currentPage, setCurrentPage}) {
     dispatch(filterDog(input.target.value))
   }
 
+  function handleOrder(input) {
+    let value = input.target.value;
+    if(value === "A-Z" || value === "Z-A"){
+      dispatch(orderAlphabet(value))
+    }
+    if(value === "0-9" || value === "9-0"){
+      dispatch(OrderWeight(value))
+    }
+  }
+
   return (
     <div>
       <span>Filtros:</span>
@@ -29,12 +39,22 @@ export default function Filter({currentPage, setCurrentPage}) {
         <option value="defauld">Por Defecto</option>
       </select>
       <select name='filtertemper' onChange={handleSelect}>
-      <option selected disabled>selecciona uno</option>
-      <option  value="all">Todos</option>
-      {temperaments?.map(temper =>
-              <option value={temper.name} key={temper.id}>{temper.name}</option>
-              )}
+        <option selected disabled>selecciona uno</option>
+        <option  value="all">Todos</option>
+        {temperaments?.map(temper =>
+        <option value={temper.name} key={temper.id}>{temper.name}</option>
+        )}
       </select>
+      <div>
+        <span>Odenar por:</span>
+        <select name="ornder" onChange={handleOrder}>
+        <option selected disabled>Orden</option>
+          <option value="A-Z">Nombre: A-Z</option>
+          <option value="Z-A">Nombre: Z-A</option>
+          <option value="0-9">Peso: 0-9</option>
+          <option value="9-0">Peso: 9-0</option>
+        </select>
+      </div>
     </div>
   )
 
