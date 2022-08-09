@@ -14,4 +14,4 @@ export const ORDER_ALPHABET = 'ORDER_ALPHABET';
 
 export const ORDER_WEIGHT = 'ORDER_WEIGHT';
 
-// export const DOG_WANTED = 'DOG_WANTED';
+export const DOG_SEARCH = 'DOG_SEARCH';

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FILTER_CREATED, GET_DETAILS, ORDER_WEIGHT, ORDER_ALPHABET, FILTER_DOG, GET_ALL_DOGS, GET_TEMPERAMENT, POST_DOG } from './Actions'
+import { FILTER_CREATED, DOG_SEARCH, GET_DETAILS, ORDER_WEIGHT, ORDER_ALPHABET, FILTER_DOG, GET_ALL_DOGS, GET_TEMPERAMENT, POST_DOG } from './Actions'
 
 export const getAllDogs = () => {
   return async function(dispatch) {
@@ -83,6 +83,20 @@ export const filterDog = (payload) => {
         })
       } catch (error) {
         console.log(error);
+      }
+    }
+  }
+
+  export const searchDog = (payload) => {
+    return async function(dispatch) {
+      try {
+        let dogsWanted = (await axios(`http://localhost:3001/dogs/?name=${payload}`)).data;
+        return dispatch({
+          type: DOG_SEARCH,
+          payload: dogsWanted
+        })
+      } catch (error) {
+        console.log(error)
       }
     }
   }

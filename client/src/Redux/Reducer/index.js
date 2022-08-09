@@ -1,4 +1,4 @@
-import { FILTER_CREATED, GET_DETAILS, ORDER_WEIGHT, FILTER_DOG, GET_ALL_DOGS, GET_TEMPERAMENT, ORDER_ALPHABET, POST_DOG } from '../Actions/Actions.js'
+import { FILTER_CREATED, DOG_SEARCH, GET_DETAILS, ORDER_WEIGHT, FILTER_DOG, GET_ALL_DOGS, GET_TEMPERAMENT, ORDER_ALPHABET, POST_DOG } from '../Actions/Actions.js'
 
 
 const initialState = {
@@ -7,6 +7,7 @@ const initialState = {
   dogDetails: [],
   temperaments: [],
   dogsDetail: [],
+  dogNameSearch: []
 };
 
 export default function reducer(state = initialState, { type, payload }){
@@ -16,7 +17,7 @@ export default function reducer(state = initialState, { type, payload }){
         ...state,
         allDogs: payload.filter(dog => !dog.createDb),
         allDogsFilter: payload,
-        dogsHome: payload,
+        dogNameSearch: payload,
       };
       case GET_TEMPERAMENT:
         return {
@@ -78,6 +79,11 @@ export default function reducer(state = initialState, { type, payload }){
             ...state,
             dogDetails: payload
           };
+          case DOG_SEARCH:
+            return {
+              ...state,
+              dogNameSearch: payload
+            }
     default:
       return {...state}
   }
