@@ -93,7 +93,17 @@ async function searchDog(name) {
     temperament: res[0].temperament.split(", "),
     img: `https://cdn2.thedogapi.com/images/${res[0].reference_image_id}.jpg`
   }
-  return dogName;
+
+  const dogsdb = await Dog.findAll({
+    where : {
+      name: {[op.iLike]: `%${name}%`}
+    },
+    include: Temper
+  })
+
+    const allDogs = [...dogsdb, dogName]
+
+  return allDogs;
 };
 
 async function getDogId(dogId){
