@@ -1,6 +1,7 @@
 const { APY_KEY_DOG } = process.env
 const axios = require("axios");
 const { Dog, Temper } = require("../db.js");
+const { Op } = require('sequelize');
 
 async function getAllDogs() {
   // https://api.thedogapi.com/v1/breeds?api_key=b67fcfff-6222-4682-b9a0-c674d6e3fc37
@@ -82,7 +83,7 @@ async function searchDog(name) {
   const responceNameApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${APY_KEY_DOG}`);
   const res = await responceNameApi.data
   const getAllDogsApi = [];
-  for (let i = 0; i < res.length; i++) {
+  for (let i = 0; i < 40; i++) {
     getAllDogsApi.push({
       id: res[i].id,
       name: res[i].name,
@@ -98,6 +99,11 @@ async function searchDog(name) {
   }
 
   const getAllDogsDb = await Dog.findAll({
+    where: {
+      name: {
+        [Op.iLike]:'%' + name + '%'
+      }
+    },
     include: {
       model: Temper,
       attributes: ['name'],
@@ -125,7 +131,7 @@ async function searchDog(name) {
     if(!name){
       return allDogs;
     } else {
-      const dogName = await allDogs.filter(dog => dog.name.toLowerCase().includes(name.toLowerCase()))
+      const dogName = allDogs.filter(dog => dog.name.toLowerCase().includes(name.toLowerCase()))
       return dogName;
 };
 }
