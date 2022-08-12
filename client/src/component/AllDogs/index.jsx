@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Dog from '../Dog';
 import Loader from '../Loader';
 import DogPerPage from '../DogPerPage';
+import styles from './AllDogs.module.css'
 
 export default function AllDogs({currentPage, setCurrentPage, dogsPerPage, indexOfFirstDog, indexOfLastDog}) {
 
@@ -15,11 +16,13 @@ export default function AllDogs({currentPage, setCurrentPage, dogsPerPage, index
   }
 
   return (
-    <div>
+    <div className={styles.allcontenDogs}>
+      <div  className={styles.contenDogs}>
       {dogs.length > 0 ? (
         dogs.map((dog, i) => (
-          <Link to={`/detail/${dog.id}`} key={i} className={StyleSheet.link}>
+          <Link to={`/detail/${dog.id}`} key={i} className={styles.link}>
             <Dog
+            id={dog.id}
             img={dog.img}
             name={dog.name}
             weight_min={dog.weight_min}
@@ -33,7 +36,8 @@ export default function AllDogs({currentPage, setCurrentPage, dogsPerPage, index
           <Loader />
         </div>
       )}
-      <div>
+      </div>
+      <div className={styles.paginate}>
         <DogPerPage
         paginate={paginate}
         currentPage={currentPage}

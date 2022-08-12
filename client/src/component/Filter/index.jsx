@@ -1,7 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { filterCreate, filterDog, orderAlphabet, OrderWeight } from '../../Redux/Actions'
-
+import styles from './Filter.module.css'
 
 export default function Filter({currentPage, setCurrentPage}) {
 
@@ -31,24 +31,26 @@ export default function Filter({currentPage, setCurrentPage}) {
 
   return (
     <div>
+      <div className={styles.contefilter}>
       <span>Filtros:</span>
-      <select name='filterdog' onChange={handleFilter}>
-        <option selected disabled>selecciona uno</option>
+      <select defaultValue={'DEFAULT'} className={styles.select} name='filterdog' onChange={handleFilter}>
+        <option selectedvalue="DEFAULT" disabled>selecciona uno</option>
         <option value="Todos">Todos</option>
         <option value="Creados">Mis Peludos</option>
         <option value="defauld">Por Defecto</option>
       </select>
-      <select name='filtertemper' onChange={handleSelect}>
-        <option selected disabled>selecciona uno</option>
+      <select defaultValue={'DEFAULT'} className={styles.select} name='filtertemper' onChange={handleSelect}>
+        <option selectedvalue="DEFAULT" disabled>selecciona uno</option>
         <option  value="all">Todos</option>
         {temperaments?.map(temper =>
         <option value={temper.name} key={temper.id}>{temper.name}</option>
         )}
       </select>
+      </div>
       <div>
         <span>Odenar por:</span>
-        <select name="ornder" onChange={handleOrder}>
-        <option selected disabled>Orden</option>
+        <select defaultValue={'DEFAULT'} className={styles.select} name="ornder" onChange={handleOrder}>
+        <option selectedvalue="DEFAULT" disabled>Orden</option>
           <option value="A-Z">Nombre: A-Z</option>
           <option value="Z-A">Nombre: Z-A</option>
           <option value="0-9">Peso: 0-9</option>

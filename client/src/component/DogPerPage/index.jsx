@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import styles from './DogPerPage.module.css'
 
 export default function DogPerPage({paginate, currentPage, dogsPerPage, alldogs, setCurrentPage}) {
 
@@ -8,7 +9,7 @@ export default function DogPerPage({paginate, currentPage, dogsPerPage, alldogs,
 
   const numPage = [];
 
-  for (let i = 0; i <= Math.ceil(alldogs / dogsPerPage); i++){
+  for (let i = 1; i <= Math.ceil(alldogs / dogsPerPage); i++){
     numPage.push(i)
   }
 
@@ -16,40 +17,44 @@ export default function DogPerPage({paginate, currentPage, dogsPerPage, alldogs,
     if(currentPage !== numPage.length){
       setCurrentPage(currentPage + 1)
     }
-    if(currentPage + 1 >maxPageLimit){
-      setmaxPageLimit(maxPageLimit + numPage);
-      setminPageLimit(minPageLimit + numPage);
+    if(currentPage +1  > maxPageLimit){
+      setmaxPageLimit(maxPageLimit + pageLimit);
+      setminPageLimit(minPageLimit + pageLimit);
     }
   }
 
   function handlePrevPage() {
     if(currentPage !== 1){
       setCurrentPage(currentPage - 1)
-    }
-    if((currentPage - 1) % pageLimit === 0){
-      setmaxPageLimit(maxPageLimit - numPage);
-      setminPageLimit(minPageLimit - numPage);
+      if((currentPage - 1) % pageLimit === 0){
+        setmaxPageLimit(maxPageLimit - pageLimit);
+        setminPageLimit(minPageLimit - pageLimit);
+      }
     }
   }
 
-
-
   return (
     <div>
-      <ul>
-        <button onClick={handlePrevPage}>atras</button>
+      <ul className={styles.contepaginate}>
+        {currentPage !== 1 ?
+        <button className={styles.button} onClick={handlePrevPage}>Anterior</button>        
+        : null
+        }
         {numPage && numPage.map((page, i) => {
           if(page < maxPageLimit + 1 && page > minPageLimit) {
             return(
-              <li key={i} className="pagination_item">
-                <span className={currentPage === page ? "page active" : "page"} onClick={() => paginate(page)}>{page}</span>
+              <li key={i} className={styles.pagination_item}>
+                <span className={currentPage === page ? styles.active : styles.page} onClick={() => paginate(page)}>{page}</span>
               </li>
             )
           } else {
             return null
           }
         })}
-        <button onClick={handleNextPage}>adelante</button>
+        {currentPage !== numPage.length ?
+        <button className={styles.button} onClick={handleNextPage}>Siguiente</button>
+        : null
+        }
       </ul>
     </div>
   )

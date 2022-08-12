@@ -4,6 +4,7 @@ import { getTemperament } from '../../Redux/Actions'
 import NavBar from '../NavBar';
 import  AllDogs  from '../AllDogs'
 import Filter from '../Filter';
+import styles from './HomePage.module.css'
 
 export default function HomePage() {
 
@@ -19,7 +20,7 @@ export default function HomePage() {
   const indexOfFirstDog = indexOfLastDog - dogsPerPage;
 
   return (
-    <div>
+    <div className={styles.conteHomePage}>
       <NavBar />
       <Filter
       currentPage={currentPage}

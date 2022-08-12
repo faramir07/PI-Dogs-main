@@ -14,7 +14,7 @@ export default function NavBar() {
 
   function handleChange(e){
     setDogName(e.target.value)
-    if(dogName && dogName) {
+    if(dogName) {
       dispatch(searchDog(dogName))
     }
   }
@@ -36,8 +36,8 @@ export default function NavBar() {
         <div >
           {dogName && dogNameSearch.slice(0, 10).map((dog, i) => {
             return (
-              <div>
-                <Link to={`/detail/${dog.id}`} key={i}>{dog.name}</Link>
+              <div key={dog.id}>
+                <Link className={styles.linkdog} to={`/detail/${dog.id}`} >{dog.name}</Link>
               </div>
             )
           })}
