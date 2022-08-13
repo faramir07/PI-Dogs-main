@@ -39,7 +39,7 @@ export const postDog = (payload) => {
       })
     } catch (error) {
       console.log(error);
-      alert('no tenemos peludos con esas caracteristicas');
+      alert(error.response.data.msg);
     }
   }
 }

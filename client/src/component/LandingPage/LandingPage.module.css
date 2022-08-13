@@ -12,7 +12,7 @@
   box-shadow: 0 4px 27px 0 rgb(0 0 0 / 50%);
 }
 
-h1,p,.link{
+h1,.link{
   margin: 10px;
   font-weight: 800;
 }

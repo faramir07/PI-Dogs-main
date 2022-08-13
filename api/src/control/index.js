@@ -4,8 +4,6 @@ const { Dog, Temper } = require("../db.js");
 const { Op } = require('sequelize');
 
 async function getAllDogs() {
-  // https://api.thedogapi.com/v1/breeds?api_key=b67fcfff-6222-4682-b9a0-c674d6e3fc37
-  // https://api.thedogapi.com/v1/breeds/search?q=Akita
   const responceApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${APY_KEY_DOG}`)
   const res = await responceApi.data
   const getAllDogsApi = [];
@@ -14,9 +12,9 @@ async function getAllDogs() {
       id: res[i].id,
       name: res[i].name,
       height_min: res[i].height.metric.slice(0, 2).trim(),
-      height_max: res[i].height.metric.slice(-2).trim(),  // altura
+      height_max: res[i].height.metric.slice(-2).trim(),
       weight_min: res[i].weight.metric.slice(0, 2).trim(),
-      weight_max: res[i].weight.metric.slice(-2).trim(),  // peso
+      weight_max: res[i].weight.metric.slice(-2).trim(),
       life_min: res[i].life_span.slice(0, 2).trim(),
       life_max: res[i].life_span.slice(4, -6).trim(),
       temperament: res[i].temperament.split(", "),
@@ -88,9 +86,9 @@ async function searchDog(name) {
       id: res[i].id,
       name: res[i].name,
       height_min: res[i].height.metric.slice(0, 2).trim(),
-      height_max: res[i].height.metric.slice(-2).trim(),  // altura
+      height_max: res[i].height.metric.slice(-2).trim(),
       weight_min: res[i].weight.metric.slice(0, 2).trim(),
-      weight_max: res[i].weight.metric.slice(-2).trim(),  // peso
+      weight_max: res[i].weight.metric.slice(-2).trim(),
       life_min: res[i].life_span.slice(0, 2).trim(),
       life_max: res[i].life_span.slice(4, -6).trim(),
       temperament: res[i].temperament.split(", "),

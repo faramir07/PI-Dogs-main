@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTemperament } from '../../Redux/Actions'
 import NavBar from '../NavBar';
 import { postDog } from '../../Redux/Actions'
+import styles from './CreateDogs.module.css'
 
 function validate(value) {
   let error = {};
@@ -146,57 +147,73 @@ export default function CreateDogs() {
   return (
     <div>
       <NavBar />
+      <div className={styles.contentodoform}>
       <h1>ADOPTA UN PELUDO</h1>
-      <h3>Descríbenos como seria tu amigo peludo ideal para ti y tu familia: llena este pequeño formulario</h3>
-      <p>Datos obligatorios*</p>
-      <form  onSubmit={handleSubmit}>
-        <p>Nombre que le pondrias*</p>
-        <input type="text" name="name" placeholder='Eje: Chandozo' onChange={handleChange} value={input.name}/>
-        <div>
-          <p>Altura*</p>
-          <input type="text" name="height_min" placeholder='Min' onChange={handleChange} value={input.height_min}/>
-          <span>Cm</span>
-          <input type="text" name="height_max" placeholder='Max' onChange={handleChange} value={input.height_max}/>
-          <span>Cm</span>
+      <h3>Describe como seria tu amigo peludo ideal para ti y tu familia.</h3>
+      <h5>llena este pequeño formulario</h5>
+      <h5>Datos obligatorios*</h5>
+      <form className={styles.contenform}  onSubmit={handleSubmit}>
+        <div className={styles.conteninputs}>
+          <div className={styles.conteninput}>
+        <p className={styles.title}>Nombre*</p>
+        <input className={styles.searchBarname} type="text" name="name" placeholder='Eje: Chandozo' onChange={handleChange} value={input.name}/>
+          </div>
+        <div className={styles.conteninput}>
+          <p className={styles.title}>Altura*</p>
+          <div className={styles.imputext}>
+            <input className={styles.searchBar} type="text" name="height_min" placeholder='Min' onChange={handleChange} value={input.height_min}/>
+            <span>Cm</span>
+            <input className={styles.searchBar} type="text" name="height_max" placeholder='Max' onChange={handleChange} value={input.height_max}/>
+            <span>Cm</span>
+          </div>
         </div>
-        <div>
-          <p>Peso*</p>
-          <input type="text" name="weight_min" placeholder='Min' onChange={handleChange} value={input.weight_min}/>
-          <span>Kg</span>
-          <input type="text" name="weight_max" placeholder='Max' onChange={handleChange} value={input.weight_max}/>
-          <span>Kg</span>
+        <div className={styles.conteninput}>
+          <p className={styles.title}>Peso*</p>
+          <div className={styles.imputext}>
+            <input className={styles.searchBar} type="text" name="weight_min" placeholder='Min' onChange={handleChange} value={input.weight_min}/>
+            <span>Kg</span>
+            <input className={styles.searchBar} type="text" name="weight_max" placeholder='Max' onChange={handleChange} value={input.weight_max}/>
+            <span>Kg</span>
+          </div>
         </div>
-        <div>
-          <p>Años</p>
-          <input type="text" name="life_min" placeholder='Min' onChange={handleChange} value={input.life_min}/>
-          <span>Años</span>
-          <input type="text" name="life_max" placeholder='Max' onChange={handleChange} value={input.life_max}/>
-          <span>Años</span>
+        <div className={styles.conteninput}>
+          <p className={styles.title}>Años</p>
+          <div className={styles.imputext}>
+            <input className={styles.searchBar} type="text" name="life_min" placeholder='Min' onChange={handleChange} value={input.life_min}/>
+            <span>Años</span>
+            <input className={styles.searchBar} type="text" name="life_max" placeholder='Max' onChange={handleChange} value={input.life_max}/>
+            <span>Años</span>
+          </div>
         </div>
-        <div>
-          <p>Temperamento</p>
-          <select name="temperament" onChange={handleSelect}>
+        <div className={styles.conteninput}>
+          <p className={styles.title}>Temperamento</p>
+          <select className={styles.searchBar} name="temperament" onChange={handleSelect}>
             {temperaments?.map(temper =>
               <option value={temper.name} key={temper.id}>{temper.name}</option>
               )}
           </select>
         </div>
         <div>
-          <ul>
+          <ul className={styles.contelist}>
               {input.temperament?.map((temper, i) => {
                 return (
-                  <li key={i}>
+                  <li className={styles.list} key={i}>
                     {temper}
-                    <button type='button' value={temper} onClick={handleDeleteTemper}>x</button>
+                    <button className={styles.bottonx} type='button' value={temper} onClick={handleDeleteTemper}>x</button>
                   </li>
                 )
               })}
           </ul>
         </div>
         <div>
-          <input type='submit' value='adoptar' className={error.name || error.height_min || error.height_max || error.weight_min || error.weight_max ? "noSubmit" : "submit"} />
+          {
+            (error.name || error.height_min || error.height_max || error.weight_min || error.weight_max) ? <div className={styles.error}>{error.name || error.height_min || error.height_max || error.weight_min || error.weight_max}</div>
+            : <input type='submit' value='Adoptar' className={styles.imputtuton}/>
+          }
+        </div>
         </div>
       </form>
+      </div>
     </div>
   )
 }
