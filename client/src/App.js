@@ -14,7 +14,7 @@ function App() {
 
     useEffect(() => {
         dispatch(getAllDogs())
-    }, [dispatch])
+    }, [])
 
   return (
     <div className="App">

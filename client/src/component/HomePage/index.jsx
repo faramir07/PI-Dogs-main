@@ -15,7 +15,7 @@ export default function HomePage() {
   useEffect(() => {
     dispatch(getAllDogs())
     dispatch(getTemperament())
-  }, [dispatch])
+  }, [])
 
   const indexOfLastDog = currentPage * dogsPerPage;
   const indexOfFirstDog = indexOfLastDog - dogsPerPage;

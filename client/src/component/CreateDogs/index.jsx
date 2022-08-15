@@ -12,69 +12,63 @@ function validate(value) {
 
   // validate name
   if(!value.name){
-    error.name = msnText;
+    error.name = `nombre ${msnText}`;
   }else if(!/[A-Z]+$/i.test(value.name)) {
-    error.name = 'solo puede contener letras'
+    error.name = 'nombre solo puede contener letras'
   }else if(parseInt(value.name.length) >= 15){
     error.name = 'debe contener menos de 15 caracteres'
   }
 
   //height_max
   if(value.height_max === ""){ // "12"
-    error.height_max = msnText;
+    error.height_max = `altura max ${msnText}`;
   }else if(parseInt(value.height_max) > 81){
-    error.height_max = 'deve ser nemor a 80Cm'
+    error.height_max = 'altura deve ser nemor a 80'
   }else if(!/^[0-9]+$/.test(value.height_max)){
-    error.height_max = msnNun
+    error.height_max = `altura max ${msnNun}`
   }
 
   //height_min
   if(value.height_min === ""){
-    error.height_min = msnText;
-  }else if(parseInt(value.height_min) >= parseInt(value.height_max) && parseInt(value.height_min) < 5){
-    error.height_min = `deve ser menor a ${value.weight_max} y mayor a 5Cm`
+    error.height_min = `altura min ${msnText}`;
+  }else if(parseInt(value.height_min) >= parseInt(value.height_max) || parseInt(value.height_min) < 5){
+    error.height_min = `altura deve ser mayor ${value.height_min}`
   }else if(!/^[0-9]+$/.test(value.height_min)){
-    error.height_min = msnNun
+    error.height_min = `altura min ${msnNun}`
   }
 
   //weight_max
   if(value.weight_max === ""){
-    error.weight_max = msnText;
+    error.weight_max = `peso max ${msnText}`;
   }else if(parseInt(value.weight_max) > 50){
-    error.weight_max = 'deve ser nemor a 50Kg'
+    error.weight_max = 'peso deve ser nemor a 50'
   }else if(!/^[0-9]+$/.test(value.weight_max)){
-    error.weight_max = msnNun
+    error.weight_max = `peso max ${msnNun}`
   }
 
   //weight_min
   if(value.weight_min  === ""){
-    error.weight_min = msnText;
-  }else if(parseInt(value.weight_min) >= parseInt(value.weight_max) && parseInt(value.weight_min) < 1){
-    error.weight_min = `deve ser menor a ${value.weight_max} y mayor a 1Kg`
+    error.weight_min = `peso min ${msnText}`;
+  }else if(parseInt(value.weight_min) >= parseInt(value.weight_max) || parseInt(value.weight_min) < 1){
+    error.weight_min = `peso deve ser mayor ${value.weight_min}`
   }else if(!/^[0-9]+$/.test(value.weight_min)){
-    error.weight_min = msnNun
+    error.weight_min = `peso min ${msnNun}`
   }
 
   // life_max
   if(parseInt(value.life_max) > 15){
-    error.life_max = 'deve ser menor a  15Año'
-  }else if(!/^[0-9]+$/.test(value.life_max)){
-    error.life_max = msnNun
+    error.life_max = 'año deve ser menor a 15'
+  }else if(!/^[0-9]+$/.test(value.life_max) && value.life_max !== ""){
+    error.life_max = `años max ${msnNun}`
   }
 
   // life_min
-  if(parseInt(value.life_min) >= parseInt(value.life_max) && parseInt(value.life_min) < 1){
-    error.life_min = `deve ser menor a ${value.life_max} y mayor a 1año`
-  }else if(!/^[0-9]+$/.test(value.life_min)){
-    error.life_min = msnNun
+  if(parseInt(value.life_min) >= parseInt(value.life_max) || parseInt(value.life_min) < 0){
+    error.life_min = `año deve ser mayor ${value.life_min}`
+  }else if(!/^[0-9]+$/.test(value.life_min) && value.life_min !== "" ){
+    error.life_min = `años min ${msnNun}`
   }
   return error;
-}
-
-const randonImg = (value) => {
-  const imgDogs = value.map(dog => dog.img);
-  const num = Math.floor(Math.random() * (imgDogs.length - 0 + 1) + 0)
-  return imgDogs[num]
 }
 
 export default function CreateDogs() {
@@ -83,7 +77,7 @@ export default function CreateDogs() {
 
   useEffect(() => {
     dispatch(getTemperament())
-  }, [dispatch])
+  }, [])
 
   const temperaments = useSelector(state => state.temperaments)
   const allDogs = useSelector(state => state.allDogs)
@@ -98,14 +92,22 @@ export default function CreateDogs() {
     weight_max: "",
     life_min: "",
     life_max: "",
-    img: randonImg(allDogs),
+    img: "",
     temperament: []
   });
+
+  const randonImg = (value) => {
+    const imgDogs = value.map(dog => dog.img);
+    const num = (Math.floor(Math.random() * (imgDogs.length - 0 + 1) + 0))
+    console.log(imgDogs[num]);
+    return imgDogs[num];
+  }
 
   function handleChange(e){
     setInput({
       ...input,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      img: randonImg(allDogs)
     });
     setError(validate({
       ...input,
@@ -121,20 +123,25 @@ export default function CreateDogs() {
         })
   }
 
-  function handleSubmit(value) {
-    value.preventDefault();
+  function create(value) {
     const existsDog = allDogs.find(dog => dog.name.toLowerCase() === input.name.toLowerCase())
     if(existsDog){
       return alert(`El nombre ${input.name} ya lo tiene otro peludo`)
     }
     if(!error.name && !error.height_min && !error.height_max &&!error.weight_min && !error.weight_max){
       try {
+        value.preventDefault();
         dispatch(postDog(input));
       setInput({});
       } catch (error) {
         console.log(error);
       }
-    }
+    }else return 'campos requeridos';
+  }
+
+  function handleSubmit(event) {
+    // event.preventDefault();
+    return create(event);
   }
 
   function handleDeleteTemper(temper) {
@@ -207,7 +214,7 @@ export default function CreateDogs() {
         </div>
         <div>
           {
-            (error.name || error.height_min || error.height_max || error.weight_min || error.weight_max) ? <div className={styles.error}>{error.name || error.height_min || error.height_max || error.weight_min || error.weight_max}</div>
+            (error.name || error.height_min || error.height_max || error.weight_min || error.weight_max || error.life_max || error.life_min) ? <div className={styles.error}>{error.name || error.height_min || error.height_max || error.weight_min || error.weight_max || error.life_max || error.life_min}</div>
             : <input type='submit' value='Adoptar' className={styles.imputtuton}/>
           }
         </div>
