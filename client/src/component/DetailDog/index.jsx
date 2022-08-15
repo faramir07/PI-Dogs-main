@@ -13,7 +13,6 @@ export default function DetailDog(props) {
   const dog = useSelector(state => state.dogDetails);
 
   const {img, name, weight_max, weight_min, height_max, height_min, life_max, life_min, temperament, id} = dog;
-  console.log(dog);
 
   useEffect(() => {
     dispatch(deatailDog(dogId))

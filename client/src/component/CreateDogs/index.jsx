@@ -99,7 +99,6 @@ export default function CreateDogs() {
   const randonImg = (value) => {
     const imgDogs = value.map(dog => dog.img);
     const num = (Math.floor(Math.random() * (imgDogs.length - 0 + 1) + 0))
-    console.log(imgDogs[num]);
     return imgDogs[num];
   }
 

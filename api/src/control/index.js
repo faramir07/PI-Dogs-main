@@ -137,28 +137,26 @@ async function searchDog(name) {
 async function getDogId(dogId){
   const allDogs = await getAllDogs();
   if(isNaN(dogId)){
-    const findDogIdDb = await Dog.findByPK(dogId , {
+    const findDogIdDb = await Dog.findByPk(dogId , {
       include: {
         model: Temper,
         attributes: ["name"],
       }
     })
 
-    const dogidDb = findDogIdDb.map(e => {
       return {
-        id: e.id,
-        name: e.name,
-        height_min: e.height_min,
-        height_max: e.height_max,  // altura
-        weight_min: e.weight_min,
-        weight_max: e.weight_max, // peso
-        life_min: e.life_min,
-        life_max: e.life_min,
-        img: e.img,
-        temperament: e.temperament,
+        id: findDogIdDb.id,
+        name: findDogIdDb.name,
+        height_min: findDogIdDb.height_min,
+        height_max: findDogIdDb.height_max,
+        weight_min: findDogIdDb.weight_min,
+        weight_max: findDogIdDb.weight_max,
+        life_min: findDogIdDb.life_min,
+        life_max: findDogIdDb.life_min,
+        img: findDogIdDb.img,
+        createDb: findDogIdDb.createDb,
+        temperament: findDogIdDb.tempers.map(temper => temper.name),
       }
-    })
-    return dogidDb;
 
   }
   const dogIdApi = allDogs.find(dog => dog.id == dogId);
