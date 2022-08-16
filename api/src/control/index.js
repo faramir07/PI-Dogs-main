@@ -2,6 +2,8 @@ const { APY_KEY_DOG } = process.env
 const axios = require("axios");
 const { Dog, Temper } = require("../db.js");
 const { Op } = require('sequelize');
+
+
 async function getAllDogs() {
   const responceApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${APY_KEY_DOG}`)
   const res = await responceApi.data
@@ -91,7 +93,7 @@ async function searchDog(name) {
       life_min: res[i].life_span.slice(0, 2).trim(),
       life_max: res[i].life_span.slice(4, -6).trim(),
       temperament: res[i].temperament.split(", "),
-      img: `https://cdn2.thedogapi.com/images/${res[i].reference_image_id}.jpg`
+      img: res[i].image.url
     })
   }
 

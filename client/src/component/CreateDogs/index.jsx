@@ -129,9 +129,18 @@ export default function CreateDogs() {
     }
     if(!error.name && !error.height_min && !error.height_max &&!error.weight_min && !error.weight_max){
       try {
-        value.preventDefault();
         dispatch(postDog(input));
-      setInput({});
+      setInput({
+        name: "",
+        height_min: "",
+        height_max: "",
+        weight_min: "",
+        weight_max: "",
+        life_min: "",
+        life_max: "",
+        img: "",
+        temperament: []
+      });
       } catch (error) {
         console.log(error);
       }
@@ -139,7 +148,7 @@ export default function CreateDogs() {
   }
 
   function handleSubmit(event) {
-    // event.preventDefault();
+    event.preventDefault();
     return create(event);
   }
 

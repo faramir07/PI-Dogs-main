@@ -11,6 +11,10 @@
   border-radius: 20px;
 }
 
+.nametitle {
+  color: #2155CD;
+}
+
 .divdog {
   border-radius: 20px;
   box-shadow: 0 4px 27px 0 rgb(0 0 0 / 30%);

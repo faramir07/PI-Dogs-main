@@ -25,7 +25,11 @@ export default function DetailDog(props) {
         <div className={styles.divdog}>
         <img className={styles.img} src={img} alt={name}/>
         <div className={styles.tabledog}>
+          <div className={styles.nametitle}>
+            <h2>{name}</h2>
+          </div>
         <table>
+        <tbody>
           <tr>
             <th className={styles.encabezado}>CARACTERISTICAS</th>
             <th className={styles.encabezado}>MIN</th>
@@ -48,10 +52,11 @@ export default function DetailDog(props) {
           </tr>
           <tr>
             <th className={styles.caracteristicas}>TEMPERAMENTO</th>
-            <th colspan="2" className={styles.encabezadotempet}>{temperament?.map((temper, i) => (
+            <th colSpan="2" className={styles.encabezadotempet}>{temperament?.map((temper, i) => (
               <p key={id+i}>{temper}.</p>
               ))}</th>
           </tr>
+          </tbody>
         </table>
         </div>
         </div>
