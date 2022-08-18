@@ -34,13 +34,13 @@ export default function Filter({currentPage, setCurrentPage}) {
       <div className={styles.contefilter}>
       <span>Filtros:</span>
       <select defaultValue={'DEFAULT'} className={styles.select} name='filterdog' onChange={handleFilter}>
-        <option selectedValue="DEFAULT" disabled>selecciona uno</option>
+        <option selectedvalue="DEFAULT" disabled>selecciona uno</option>
         <option value="Todos">Todos</option>
         <option value="Creados">Mis Peludos</option>
         <option value="defauld">Por Defecto</option>
       </select>
       <select defaultValue={'DEFAULT'} className={styles.select} name='filtertemper' onChange={handleSelect}>
-        <option selectedValue="DEFAULT" disabled>selecciona uno</option>
+        <option selectedvalue="DEFAULT" disabled>selecciona uno</option>
         <option  value="all">Todos</option>
         {temperaments?.map(temper =>
         <option value={temper.name} key={temper.id}>{temper.name}</option>
@@ -50,7 +50,7 @@ export default function Filter({currentPage, setCurrentPage}) {
       <div>
         <span>Odenar por:</span>
         <select defaultValue={'DEFAULT'} className={styles.select} name="ornder" onChange={handleOrder}>
-        <option selectedValue="DEFAULT" disabled>Orden</option>
+        <option selectedvalue="DEFAULT" disabled>Orden</option>
           <option value="A-Z">Nombre: A-Z</option>
           <option value="Z-A">Nombre: Z-A</option>
           <option value="0-9">Peso: 0-9</option>

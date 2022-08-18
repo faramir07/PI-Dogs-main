@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FILTER_CREATED, DOG_SEARCH, GET_DETAILS, ORDER_WEIGHT, ORDER_ALPHABET, FILTER_DOG, GET_ALL_DOGS, GET_TEMPERAMENT, POST_DOG } from './Actions'
+import { FILTER_CREATED, LIMPIAR, DOG_SEARCH, GET_DETAILS, ORDER_WEIGHT, ORDER_ALPHABET, FILTER_DOG, GET_ALL_DOGS, GET_TEMPERAMENT, POST_DOG } from './Actions'
 
 export const getAllDogs = () => {
   return async function(dispatch) {
@@ -101,3 +101,10 @@ export const filterDog = (payload) => {
     }
   }
 
+  export const limpiargod = () => {
+    return async function (dispatch) {
+      return dispatch({
+        type: LIMPIAR
+      })
+    }
+  }

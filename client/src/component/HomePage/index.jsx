@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { useDispatch, } from "react-redux";
-import { getTemperament, getAllDogs } from '../../Redux/Actions'
+import { getTemperament, getAllDogs, limpiargod } from '../../Redux/Actions'
 import NavBar from '../NavBar';
 import  AllDogs  from '../AllDogs'
 import Filter from '../Filter';
@@ -13,6 +13,7 @@ export default function HomePage() {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(limpiargod())
     dispatch(getAllDogs())
     dispatch(getTemperament())
   }, [])

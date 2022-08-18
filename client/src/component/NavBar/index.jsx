@@ -5,6 +5,7 @@ import styles from './NavBar.module.css'
 import { searchDog } from '../../Redux/Actions'
 import landingDog from '../../images/landingdog.png';
 
+
 export default function NavBar() {
   const dispatch = useDispatch()
 
@@ -25,7 +26,7 @@ export default function NavBar() {
 
   return (
     <div className={styles.conteNav}>
-      <Link to='/homePage' >{<img className={styles.img} src={landingDog} alt="App Dogs" />}</Link>
+      <Link to='/homePage'  >{<img className={styles.img} src={landingDog} alt="App Dogs" />}</Link>
       <Link to='/adoptaDog' className={styles.adopta}>Adopta un Peludo</Link>
       <div>
       <div className={styles.divInput_SearchBar}>
