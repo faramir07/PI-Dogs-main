@@ -2,7 +2,7 @@
 
 # Individual Project - Henry Dogs
 
-<img height="200" src="./dog.png" />
+<img height="200" src="./image/dog.png" />
 
 ## Objetivos del Proyecto
 
@@ -191,3 +191,15 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
 - [ ] Al menos tener un componente del frontend con sus tests respectivos
 - [ ] Al menos tener una ruta del backend con sus tests respectivos
 - [ ] Al menos tener un modelo de la base de datos con sus tests respectivos
+
+## Landing Page
+<img height="400" src="./image/landingPage.png" />
+
+## Home
+<img height="400" src="./image/home.png" />
+
+## Form
+<img height="400" src="./image/form.png" />
+
+## Detail
+<img height="400" src="./image/detail.png" />
