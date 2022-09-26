@@ -193,13 +193,13 @@ __IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y pagin
 - [ ] Al menos tener un modelo de la base de datos con sus tests respectivos
 
 ## Landing Page
-<img height="200" src="./image/landingPage.PNG" />
+<img height="400" src="./image/landingPage.PNG" />
 
 ## Home
-<img height="200" src="./image/home.PNG" />
+<img height="400" src="./image/home.PNG" />
 
 ## Form
-<img height="200" src="./image/form.PNG" />
+<img height="400" src="./image/form.PNG" />
 
 ## Detail
-<img height="200" src="./image/detail.PNG" />
+<img height="400" src="./image/detail.PNG" />
