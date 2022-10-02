@@ -1,7 +1,7 @@
 require('dotenv').config();
-const { Sequelize } = require('sequelize');
-const fs = require('fs');
-const path = require('path');
+import { Sequelize } from 'sequelize';
+import fs from 'fs';
+import path from 'path';
 const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
@@ -20,6 +20,9 @@ fs.readdirSync(path.join(__dirname, '/models'))
   .forEach((file) => {
     modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
+
+  console.log("soy el log de Db:", modelDefiners);
+
 
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize));
