@@ -2,14 +2,48 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const {
-  DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env;
+// codigo sin deployar
+// const {
+//   DB_USER, DB_PASSWORD, DB_HOST,
+// } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`, {
+//   logging: false, // set to console.log to see the raw SQL queries
+//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
+
+// codigo para el deploy
+const { PGUSER, PGPASSWORD, PGHOST, PGPORT, PGDATABASE, } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST } = require('./variablesDB.js');
+
+let sequelize =
+  process.env.NODE_ENV === "production"
+    ? new Sequelize({
+      database: PGDATABASE,
+      dialect: "postgres",
+      host: PGHOST,
+      port: PGPORT,
+      username: PGUSER,
+      password: PGPASSWORD,
+      pool: {
+        max: 3,
+        min: 1,
+        idle: 10000,
+      },
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
+        },
+        keepAlive: true,
+      },
+      ssl: true,
+    })
+    : new Sequelize(
+      `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`,
+      { logging: false, native: false }
+    );
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];

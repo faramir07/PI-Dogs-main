@@ -17,12 +17,27 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+// codigo sin deployar
+// const server = require('./src/app.js');
+// const { conn } = require('./src/db.js');
 
-// Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+// // Syncing all the models at once.
+// conn.sync({ force: true }).then(() => {
+//   server.listen(3001, () => {
+//     console.log('%s listening at 3001'); // eslint-disable-line no-console
+//   });
+// });
+
+// codigo para el deploy
+require("dotenv").config();
+const server = require("./src/app.js");
+const PORT = 3001;
+const { conn } = require("./src/db.js");
+const cors = require('cors');
+
+  conn.sync({ force: false }).then(() => {
+  server.use(cors({ credentials: true }));
+  server.listen(process.env.PORT || PORT, () => {
+    console.log(`Servidor Activo!`);
   });
 });
