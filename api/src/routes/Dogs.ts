@@ -47,16 +47,4 @@
   });
 
   module.exports = router;
-
-  // router.get('/', passport.authenticate('jwt', {session: false}),
-  // checkRoles('admin', 'seller', 'customer'),
-  // async (req, res, nex) => {
-  //   try {
-  //     const categories = await service.find();
-  //     res.joson(categories)
-  //   } catch (error) {
-  //     nex(error)
-  //   }
-  // })
-
 })()
