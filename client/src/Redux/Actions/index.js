@@ -1,10 +1,11 @@
+import { axiosURL } from "../../index";
 import axios from 'axios';
 import { FILTER_CREATED, LIMPIAR, DOG_SEARCH, GET_DETAILS, ORDER_WEIGHT, ORDER_ALPHABET, FILTER_DOG, GET_ALL_DOGS, GET_TEMPERAMENT, POST_DOG } from './Actions'
 
 export const getAllDogs = () => {
   return async function(dispatch) {
     try {
-      let allDogs = (await axios('http://localhost:3001/dogs')).data
+      let allDogs = (await axios(`${axiosURL}/dogs`)).data
       return dispatch({
         type: GET_ALL_DOGS,
         payload: allDogs
@@ -18,7 +19,7 @@ export const getAllDogs = () => {
 export const getTemperament = () => {
   return async function(dispatch) {
     try {
-      let temperaments = (await axios('http://localhost:3001/temperaments')).data
+      let temperaments = (await axios(`${axiosURL}/temperaments`)).data
       return dispatch({
         type: GET_TEMPERAMENT,
         payload: temperaments,
@@ -32,7 +33,7 @@ export const getTemperament = () => {
 export const postDog = (payload) => {
   return async function (dispatch) {
     try {
-      await axios.post('http://localhost:3001/create', payload);
+      await axios.post(`${axiosURL}/create`, payload);
       alert("tenemos un peludo para ti ve a 'home'");
       return dispatch({
         type: POST_DOG,
@@ -76,7 +77,7 @@ export const filterDog = (payload) => {
   export const deatailDog = (payload) => {
     return async function (distpach) {
       try {
-        const dog = (await axios.get(`http://localhost:3001/dogs/${payload}`)).data
+        const dog = (await axios.get(`${axiosURL}/dogs/${payload}`)).data
         return distpach({
           type: GET_DETAILS,
           payload: dog
@@ -90,7 +91,7 @@ export const filterDog = (payload) => {
   export const searchDog = (payload) => {
     return async function(dispatch) {
       try {
-        let dogsWanted = (await axios(`http://localhost:3001/dogs/?name=${payload}`)).data;
+        let dogsWanted = (await axios(`${axiosURL}/dogs/?name=${payload}`)).data;
         return dispatch({
           type: DOG_SEARCH,
           payload: dogsWanted

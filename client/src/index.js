@@ -7,6 +7,11 @@ import App from './App';
 import store from './Redux/Store'
 import reportWebVitals from './reportWebVitals';
 
+export const axiosURL =
+  process.env.REACT_APP_API ||
+  "https://pi-dogs-main-production-48a2.up.railway.app"||
+  "http://localhost:3000";
+
 ReactDOM.render(
   <Provider store={store}>
   <BrowserRouter>
