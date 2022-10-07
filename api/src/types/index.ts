@@ -1,8 +1,8 @@
 
-
+export type Temperament = {'name'?: string, 'id'?: number}
 
 // tipado de los dogs
-export interface Dogs {
+export interface DogsType {
   id: string | number;
   name: string;
   height_min: number;
@@ -12,7 +12,7 @@ export interface Dogs {
   life_min: number;
   life_max: number;
   img: string;
-  temperament: string[];
+  temperament: Temperament[];
   createDb?: boolean;
 }
 
