@@ -12,7 +12,7 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
 });
 const basename = path.basename(__filename);
 
-const modelDefiners: any = [];
+const modelDefiners: ((arg0: Sequelize) => any)[]= [];
 
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
 fs.readdirSync(path.join(__dirname, '/models'))
@@ -20,9 +20,6 @@ fs.readdirSync(path.join(__dirname, '/models'))
   .forEach((file) => {
     modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
-
-  console.log("soy el log de Db:", modelDefiners);
-
 
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach((model: (arg0: Sequelize) => any) => model(sequelize));
@@ -33,13 +30,15 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Dog, Temper } = sequelize.models;
+export const { Dog, Temper } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
 Dog.belongsToMany(Temper, {through: "Dog_temper_Id"})
 Temper.belongsToMany(Dog, {through: "Dog_temper_Id"})
+
+export const conn = sequelize;
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

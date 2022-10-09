@@ -1,8 +1,8 @@
 import { DogsType, Temperament } from "../types/index";
+import axios from "axios";
+import { Dog, Temper } from "../db";
+import { Op } from 'sequelize';
 const { APY_KEY_DOG } = process.env
-const axios = require("axios");
-const { Dog, Temper } = require("../db");
-const { Op } = require('sequelize');
 
 const getDogsApi = async () => {
   const responceApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${APY_KEY_DOG}`)
@@ -25,7 +25,7 @@ const getDogsApi = async () => {
   return getAllDogsApi;
 }
 
-async function getAllDogs(): Promise<DogsType[] | undefined | void> {
+export const getAllDogs = async () => {
   const getAllDogsApi = await getDogsApi()
   await getTemper(getAllDogsApi);
   const getAllDogsDb = await Dog.findAll({
@@ -35,7 +35,7 @@ async function getAllDogs(): Promise<DogsType[] | undefined | void> {
     }
   });
 
-  const dogDb = getAllDogsDb.map((e: DogsType) => {
+  const dogDb = getAllDogsDb.map((e) => {
     return {
       id: e.id,
       name: e.name,
@@ -54,7 +54,7 @@ async function getAllDogs(): Promise<DogsType[] | undefined | void> {
   return allDogs;
 };
 
-async function getTemper(arr: DogsType[]): Promise<Temperament[] | undefined | void> {
+export const getTemper = async (arr: DogsType[]) => {
   const getTemper: Temperament[] = await Temper.findAll({
     attributes: ['name', 'id']
   })
@@ -80,7 +80,7 @@ async function getTemper(arr: DogsType[]): Promise<Temperament[] | undefined | v
   }
 };
 
-async function searchDog(name: string) {
+export const searchDog = async (name: string) => {
   const responceNameApi = await getDogsApi()
 
   const getAllDogsDb = await Dog.findAll({
@@ -121,10 +121,10 @@ async function searchDog(name: string) {
 };
 }
 
-async function getDogId(dogId: string | number){
+export const getDogId = async (dogId: string | number) => {
   const allDogs = await getAllDogs();
   if(typeof dogId === "string"){
-    const findDogIdDb: DogsType = await Dog.findByPk(dogId , {
+    const findDogIdDb = await Dog.findByPk(dogId , {
       include: {
         model: Temper,
         attributes: ["name"],
@@ -149,7 +149,7 @@ async function getDogId(dogId: string | number){
   return dogIdApi;
 };
 
-async function postDog(
+export const postDog = async(
   name: string,
   height_min: number,
   height_max: number,
@@ -158,7 +158,7 @@ async function postDog(
   life_min: number,
   life_max: number,
   img: string,
-  temperament: Temperament) {
+  temperament: Temperament) => {
 
   if(name || height_min || height_max || weight_min || weight_max){
     const newDog = await Dog.create({
@@ -178,9 +178,9 @@ async function postDog(
       }
     });
     await newDog.addTemper(temperDb);
-    return "tenemos un peludo para ti ve a 'home'"
+    return {mensasge: "tenemos un peludo para ti ve a 'home'"}
   }else {
-    return "campo requerido"
+    return {message: "campo requerido"}
   }
 };
 

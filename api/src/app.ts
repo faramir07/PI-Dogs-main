@@ -5,7 +5,7 @@ const routes = require('./routes/index');
 
 require('./db.js');
 
-const server = express();
+export const server = express();
 
 (server.name as string) = 'API';
 
@@ -31,5 +31,3 @@ server.use((err: any, _, res: any) => { // eslint-disable-line no-unused-vars
   console.error(err);
   res.status(status).send(message);
 });
-
-module.exports = server;

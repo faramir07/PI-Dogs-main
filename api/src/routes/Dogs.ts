@@ -1,27 +1,9 @@
-(() => {
-  const { Router } = require('express');
-  const { getAllDogs, searchDog, getDogId } = require('../control');
+  import { Router } from 'express';
+  import { getAllDogs, searchDog, getDogId } from '../control/index';
 
   const router = Router();
 
-  interface reqName {
-    query: {
-      name: String;
-    };
-  }
-
-  interface resGet {
-    status: (arg0: number) => {
-      (): any;
-      new(): any;
-      json: {
-        (arg0: any): void;
-        new(): any;
-      };
-    };
-  }
-
-  router.get('/', async (req: reqName, res: resGet, next: (arg0: unknown) => void) => {
+  router.get('/', async (req, res, next) => {
     const { name } = req.query;
     try {
       if(name){
@@ -36,7 +18,7 @@
     }
   });
 
-  router.get('/:id', async (req: { params: { id: string; }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: any): void; new(): any; }; }; }, next: (arg0: unknown) => void) => {
+  router.get('/:id', async (req, res, next) => {
     const { id } = req.params
     try {
       const getDog = await getDogId(id)
@@ -47,4 +29,3 @@
   });
 
   module.exports = router;
-})()

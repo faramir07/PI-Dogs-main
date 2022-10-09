@@ -1,5 +1,5 @@
-  const server = require('./src/app.ts')
-  const { conn } = require('./src/db.ts')
+  import { server } from './src/app';
+  import { conn } from './src/db';
 
   // Syncing all the models at once.
   conn.sync({ force: true }).then(() => {

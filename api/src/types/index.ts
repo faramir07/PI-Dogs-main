@@ -3,7 +3,7 @@ export type Temperament = {'name'?: string, 'id'?: number}
 
 // tipado de los dogs
 export interface DogsType {
-  id: string | number;
+  id?: string | number;
   name: string;
   height_min: number;
   height_max: number;
